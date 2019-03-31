@@ -33,8 +33,8 @@ module.exports = function(grunt) {
 				ie8: true
 			},
 			build: {
-				src: 'js/reveal.js',
-				dest: 'js/reveal.min.js'
+				src: 'public/js/reveal.js',
+				dest: 'public/js/reveal.min.js'
 			}
 		},
 
@@ -44,21 +44,21 @@ module.exports = function(grunt) {
 				sourceMap: false
 			},
 			core: {
-				src: 'css/reveal.scss',
-				dest: 'css/reveal.css'
+				src: 'public/css/reveal.scss',
+				dest: 'public/css/reveal.css'
 			},
 			themes: {
 				expand: true,
-				cwd: 'css/theme/source',
+				cwd: 'public/css/theme/source',
 				src: ['*.sass', '*.scss'],
-				dest: 'css/theme',
+				dest: 'public/css/theme',
 				ext: '.css'
 			}
 		},
 
 		autoprefixer: {
 			core: {
-				src: 'css/reveal.css'
+				src: 'public/css/reveal.css'
 			}
 		},
 
@@ -67,8 +67,8 @@ module.exports = function(grunt) {
 				compatibility: 'ie9'
 			},
 			compress: {
-				src: 'css/reveal.css',
-				dest: 'css/reveal.min.css'
+				src: 'public/css/reveal.css',
+				dest: 'public/css/reveal.min.css'
 			}
 		},
 
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
 					exports: false
 				}
 			},
-			files: [ 'Gruntfile.js', 'js/reveal.js' ]
+			files: [ 'Gruntfile.js', 'public/js/reveal.js' ]
 		},
 
 		connect: {
@@ -114,12 +114,12 @@ module.exports = function(grunt) {
 		zip: {
 			bundle: {
 				src: [
-					'index.html',
-					'css/**',
-					'js/**',
-					'lib/**',
-					'images/**',
-					'plugin/**',
+					'public/index.html',
+					'public/css/**',
+					'public/js/**',
+					'public/lib/**',
+					'public/images/**',
+					'public/plugin/**',
 					'**.md'
 				],
 				dest: 'reveal-js-presentation.zip'
@@ -133,10 +133,10 @@ module.exports = function(grunt) {
 			},
 			theme: {
 				files: [
-					'css/theme/source/*.sass',
-					'css/theme/source/*.scss',
-					'css/theme/template/*.sass',
-					'css/theme/template/*.scss'
+					'public/css/theme/source/*.sass',
+					'public/css/theme/source/*.scss',
+					'public/css/theme/template/*.sass',
+					'public/css/theme/template/*.scss'
 				],
 				tasks: 'css-themes'
 			},

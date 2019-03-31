@@ -17,9 +17,9 @@ Reveal.addEventListener( 'ready', function() {
 
 Reveal.initialize({
 	dependencies: [
-		{ src: '../plugin/markdown/marked.js' },
+		{ src: '../public/plugin/markdown/marked.js' },
 		// Test loading JS files with query strings
-		{ src: '../plugin/markdown/markdown.js?query=string' },
+		{ src: '../public/plugin/markdown/markdown.js?query=string' },
 	],
 	markdown: {
 		smartypants: true
