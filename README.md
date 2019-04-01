@@ -1,5 +1,7 @@
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.svg?branch=master)](https://travis-ci.org/hakimel/reveal.js) <a href="https://slides.com?ref=github"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
 
+A framework for easily creating beautiful presentations using HTML.  Now deployable on Heroku!
+
 ### Deploy on Heroku (free ($0/month) dyno)
 
 1. [Sign up to Heroku](https://signup.heroku.com/) and
@@ -7,6 +9,8 @@
 2. Click the button below and follow the instructions
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+[Check out the live demo](https://revealjs-demo.herokuapp.com/ )
 
 > This is the quickest way to get a running instance of Reveal.js! If
 > you have forked this repository, the deploy button will automatically
