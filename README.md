@@ -1,8 +1,18 @@
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.svg?branch=master)](https://travis-ci.org/hakimel/reveal.js) <a href="https://slides.com?ref=github"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
 
-A framework for easily creating beautiful presentations using HTML. [Check out the live demo](http://revealjs.com/).
+### Deploy on Heroku (free ($0/month) dyno)
+
+1. [Sign up to Heroku](https://signup.heroku.com/) and
+   [log in to your account](https://id.heroku.com/login)
+2. Click the button below and follow the instructions
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+> This is the quickest way to get a running instance of Juice Shop! If
+> you have forked this repository, the deploy button will automatically
+> pick up your fork for deployment! As long as you do not perform any
+> DDoS attacks you are free to use any tools or scripts to hack your
+> Juice Shop instance on Heroku!
 
 reveal.js comes with a broad range of features including [nested slides](https://github.com/hakimel/reveal.js#markup), [Markdown contents](https://github.com/hakimel/reveal.js#markdown), [PDF export](https://github.com/hakimel/reveal.js#pdf-export), [speaker notes](https://github.com/hakimel/reveal.js#speaker-notes) and a [JavaScript API](https://github.com/hakimel/reveal.js#api). There's also a fully featured visual editor and platform for sharing reveal.js presentations at [slides.com](https://slides.com?ref=github).
 
