@@ -22,6 +22,7 @@ reveal.js comes with a broad range of features including [nested slides](https:/
 ## Table of contents
 
 - [reveal.js ![Build Status](https://travis-ci.org/hakimel/reveal.js) <a href="https://slides.com?ref=github"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>](#revealjs-build-statushttpstravis-ciorghakimelrevealjs-a-href%22httpsslidescomrefgithub%22img-src%22httpss3amazonawscomstaticslidesimagesslides-github-banner-320x40png1%22-alt%22slides%22-width%22160%22-height%2220%22a)
+		- [Deploy on Heroku (free ($0/month) dyno)](#deploy-on-heroku-free-0month-dyno)
 	- [Table of contents](#table-of-contents)
 			- [More reading](#more-reading)
 	- [Online Editor](#online-editor)
@@ -63,7 +64,8 @@ reveal.js comes with a broad range of features including [nested slides](https:/
 		- [Internal links](#internal-links)
 		- [Fragments](#fragments)
 		- [Fragment events](#fragment-events)
-		- [Code syntax highlighting](#code-syntax-highlighting)
+		- [Code Syntax Highlighting](#code-syntax-highlighting)
+			- [Line Numbers & Highlights](#line-numbers--highlights)
 		- [Slide number](#slide-number)
 		- [Overview mode](#overview-mode)
 		- [Fullscreen mode](#fullscreen-mode)
@@ -82,6 +84,8 @@ reveal.js comes with a broad range of features including [nested slides](https:/
 			- [Share and Print Speaker Notes](#share-and-print-speaker-notes)
 			- [Speaker notes clock and timers](#speaker-notes-clock-and-timers)
 	- [Server Side Speaker Notes](#server-side-speaker-notes)
+	- [Plugins](#plugins)
+		- [Retrieving Plugins](#retrieving-plugins)
 	- [Multiplexing](#multiplexing)
 			- [Master presentation](#master-presentation)
 			- [Client presentation](#client-presentation)
@@ -485,7 +489,7 @@ Reveal.initialize({
 		{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 
 		// Syntax highlight for <code> elements
-		{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: 'plugin/highlight/highlight.js', async: true },
 
 		// Zoom in and out with Alt+click
 		{ src: 'plugin/zoom-js/zoom.js', async: true },
@@ -951,7 +955,7 @@ Reveal.addEventListener( 'fragmenthidden', function( event ) {
 } );
 ```
 
-### Code syntax highlighting
+### Code Syntax Highlighting
 
 By default, Reveal is configured with [highlight.js](https://highlightjs.org/) for code syntax highlighting. To enable syntax highlighting, you'll have to load the highlight plugin ([plugin/highlight/highlight.js](plugin/highlight/highlight.js)) and a highlight.js CSS theme (Reveal comes packaged with the Monokai themes: [lib/css/monokai.css](lib/css/monokai.css)).
 
@@ -959,7 +963,7 @@ By default, Reveal is configured with [highlight.js](https://highlightjs.org/) f
 Reveal.initialize({
 	// More info https://github.com/hakimel/reveal.js#dependencies
 	dependencies: [
-		{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: 'plugin/highlight/highlight.js', async: true },
 	]
 });
 ```
@@ -977,6 +981,33 @@ Below is an example with clojure code that will be syntax highlighted. When the 
 	</code></pre>
 </section>
 ```
+
+#### Line Numbers & Highlights
+
+To enable line numbers, add `data-line-numbers` to your `<code>` tags. If you want to highlight specific lines you can provide a comma separated list of line numbers using the same attribute. For example, in the following example lines 4 and 8-11 are highlighted:
+
+```html
+<pre><code class="hljs" data-line-numbers="4,8-11">
+import React, { useState } from 'react';
+ 
+function Example() {
+  const [count, setCount] = useState(0);
+ 
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+</code></pre>
+```
+
+<img width="300" alt="line-numbers" src="https://user-images.githubusercontent.com/629429/55332077-eb3c4780-5494-11e9-8854-ba33cd0fa740.png">
+
+
 
 ### Slide number
 
@@ -1238,6 +1269,28 @@ Then:
 1. Install [Node.js](http://nodejs.org/) (4.0.0 or later)
 2. Run `npm install`
 3. Run `node plugin/notes-server`
+
+
+## Plugins
+
+Plugins should register themselves with reveal.js by calling `Reveal.registerPlugin( 'myPluginID', MyPlugin )`. Registered plugin instances can optionally expose an "init" function that reveal.js will call to initialize them.
+
+When reveal.js is booted up via `Reveal.initialize()`, it will go through all registered plugins and invoke their "init" methods. If the "init" method returns a Promise, reveal.js will wait for that promise to be fullfilled before finshing the startup sequence and firing the [ready](#ready-event) event. Here's an example of a plugin that does some asynchronous work before reveal.js can proceed:
+
+```javascript
+let MyPlugin = {
+	init: () =>  new Promise( resolve => setTimeout( resolve, 3000 ) )
+};
+Reveal.registerPlugin( 'myPlugin', MyPlugin );
+Reveal.addEventListener( 'ready', () => console.log( 'Three seconds later...' ) );
+Reveal.initialize();
+```
+
+If the init method does _not_ return a Promise, the plugin is considered ready right away and will not hold up the reveal.js startup sequence.
+
+### Retrieving Plugins
+
+If you want to check if a specific plugin is registered you can use the `Reveal.hasPlugin` method and pass in a plugin ID, for example: `Reveal.hasPlugin( 'myPlugin' )`. If you want to retrieve a plugin instance you can use `Reveal.getPlugin( 'myPlugin' )`.
 
 
 ## Multiplexing
